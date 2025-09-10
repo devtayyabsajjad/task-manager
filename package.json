@@ -4,8 +4,8 @@
   },
   "scripts": {
     "dev": "turbo run dev",
-    "build": "cd apps/frontend && npm install && npm run build",
-    "vercel-build": "cd apps/frontend && npm install && npm run build",
+    "build": "cd apps/backend && npm install && npm run vercel-build && cd ../frontend && npm install && npm run build",
+    "vercel-build": "cd apps/backend && npm install && npm run vercel-build && cd ../frontend && npm install && npm run build",
     "start": "node apps/backend/dist/main",
     "deploy-check": "node scripts/pre-deploy-check.js"
   },
