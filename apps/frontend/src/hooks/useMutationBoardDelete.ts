@@ -4,6 +4,7 @@ import refreshTokenHandler from '../lib/refreshTokenHandler';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import submitActivity from '../lib/submitActivity';
+import { apiConfig } from '../lib/apiConfig';
 
 type useMutationBoardDeleteProps = {
   boardId: string | undefined;
@@ -40,7 +41,7 @@ const useMutationBoardDelete = ({
       const responseData = await submitHandler(accessT);
 
       await submitActivity(
-        `${import.meta.env.VITE_API_WORKSPACES}`,
+        apiConfig.API_WORKSPACES,
         workspaceId!,
         boardTitle!,
         'board',
@@ -58,7 +59,7 @@ const useMutationBoardDelete = ({
 
   const submitHandler = async (token: string | null) => {
     const response = await fetch(
-      `${import.meta.env.VITE_API_BOARDS}/${boardId}`,
+      `${apiConfig.API_BOARDS}/${boardId}`,
       {
         method: 'DELETE',
         headers: {

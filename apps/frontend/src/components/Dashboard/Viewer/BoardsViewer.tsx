@@ -15,6 +15,7 @@ import useQueryAllByItemId from '../../../hooks/useQueryAllByItemId';
 import { TBoard } from '../../../types/board.type';
 import { RoleBasedAccess } from '../../RoleBasedAccess';
 import BoardCard from './BoardCard';
+import { apiConfig } from '../lib/apiConfig';
 
 type BoardsViewerProps = {
   selectedWorkspaceId: string | undefined;
@@ -25,7 +26,7 @@ const BoardsViewer = ({ selectedWorkspaceId }: BoardsViewerProps) => {
 
   const { data: boards, isPending } = useQueryAllByItemId<TBoard[]>(
     'boards',
-    `${import.meta.env.VITE_API_WORKSPACES}`,
+    `apiConfig.API_WORKSPACES`,
     selectedWorkspaceId
   );
 

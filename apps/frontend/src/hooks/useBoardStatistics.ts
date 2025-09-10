@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { apiConfig } from '../lib/apiConfig';
 
 export type BoardStatistics = {
   boardId: string;
@@ -19,7 +20,7 @@ export type BoardStatistics = {
 
 const fetchBoardStatistics = async (boardId: string): Promise<BoardStatistics> => {
   const token = localStorage.getItem('access_token');
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/boards/${boardId}/statistics`, {
+  const response = await fetch(`apiConfig.API_URL/boards/${boardId}/statistics`, {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',

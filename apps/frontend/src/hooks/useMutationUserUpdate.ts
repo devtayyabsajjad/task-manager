@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContextProvider';
 import { z } from 'zod';
 import refreshTokenHandler from '../lib/refreshTokenHandler';
 import { toast } from 'react-toastify';
+import { apiConfig } from '../lib/apiConfig';
 
 const formSchema = z
   .object({
@@ -64,7 +65,7 @@ const useMutationUserUpdate = () => {
     data: formType,
     token: string | null
   ) => {
-    const response = await fetch(`${import.meta.env.VITE_API_USER}`, {
+    const response = await fetch(`apiConfig.API_USER`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

@@ -21,6 +21,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import useQueryAll from '../hooks/useQueryAll';
 import useMutationUserUpdate from '../hooks/useMutationUserUpdate';
 import { TUser } from '../types/user.type';
+import { apiConfig } from '../lib/apiConfig';
 
 const formSchema = z
   .object({
@@ -56,7 +57,7 @@ const ProfilePage = () => {
 
   const userQuery = useQueryAll<TUser>(
     'user',
-    `${import.meta.env.VITE_API_USER}`
+    apiConfig.API_USER
   );
 
   const userMutation = useMutationUserUpdate();

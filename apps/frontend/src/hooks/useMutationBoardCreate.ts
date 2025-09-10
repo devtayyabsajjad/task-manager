@@ -6,6 +6,7 @@ import submitActivity from '../lib/submitActivity';
 import { TBoard } from '../types/board.type';
 import refreshTokenHandler from '../lib/refreshTokenHandler';
 import { toast } from 'react-toastify';
+import { apiConfig } from '../lib/apiConfig';
 
 const formSchema = z.object({
   title: z.string().min(1, 'Board is required').trim(),
@@ -52,7 +53,7 @@ const useMutationBoardCreate = ({
       const responseData: TBoard = await submitHandler(data, accessT);
 
       await submitActivity(
-        `${import.meta.env.VITE_API_WORKSPACES}`,
+        `apiConfig.API_WORKSPACES`,
         responseData.workspaceId,
         responseData.title,
         'board',
@@ -84,7 +85,7 @@ const useMutationBoardCreate = ({
     token: string | null
   ) => {
     const response = await fetch(
-      `${import.meta.env.VITE_API_WORKSPACES}/${selectedWorkspaceId}/boards`,
+      `apiConfig.API_WORKSPACES/${selectedWorkspaceId}/boards`,
       {
         method: 'POST',
         headers: {

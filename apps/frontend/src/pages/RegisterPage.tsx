@@ -20,6 +20,7 @@ import {
   MenuItem
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { apiConfig } from '../lib/apiConfig';
 
 const formSchema = z
   .object({
@@ -83,7 +84,7 @@ const RegisterPage = () => {
       setErrorText('');
       setSubmitting(true);
       const response = await fetch(
-        `${import.meta.env.VITE_API_REGISTER}`,
+        apiConfig.API_REGISTER,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

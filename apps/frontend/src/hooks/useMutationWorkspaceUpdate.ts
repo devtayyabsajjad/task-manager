@@ -5,6 +5,7 @@ import refreshTokenHandler from '../lib/refreshTokenHandler';
 import submitActivity from '../lib/submitActivity';
 import { TWorkspace } from '../types/workspace.type';
 import { toast } from 'react-toastify';
+import { apiConfig } from '../lib/apiConfig';
 
 const formSchema = z.object({
   workspace: z.string().min(1, 'Workspace is required').trim()
@@ -43,7 +44,7 @@ const useMutationWorkspaceUpdate = ({
       const responseData = await submitHandler(data, accessT);
 
       await submitActivity(
-        `${import.meta.env.VITE_API_WORKSPACES}`,
+        apiConfig.API_WORKSPACES,
         responseData.id,
         responseData.title,
         'workspace',
@@ -68,7 +69,7 @@ const useMutationWorkspaceUpdate = ({
     token: string | null
   ) => {
     const response = await fetch(
-      `${import.meta.env.VITE_API_WORKSPACES}/${selectedWorkspaceId}`,
+      `${apiConfig.API_WORKSPACES}/${selectedWorkspaceId}`,
       {
         method: 'PUT',
         headers: {

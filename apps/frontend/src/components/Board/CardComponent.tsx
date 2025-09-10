@@ -13,6 +13,7 @@ import CardModalCreate from './Modal/CardModalCreate';
 import useQueryAllByItemId from '../../hooks/useQueryAllByItemId';
 import CardModalUpdate from './Modal/CardModalUpdate';
 import { RoleBasedAccess } from '../RoleBasedAccess';
+import { apiConfig } from '../lib/apiConfig';
 
 type CardComponentProps = {
   workspaceId: string | undefined;
@@ -32,7 +33,7 @@ const CardComponent = ({
 
   const queryCards = useQueryAllByItemId<TCard[]>(
     'cards',
-    `${import.meta.env.VITE_API_LISTS}`,
+    `apiConfig.API_LISTS`,
     listId
   );
 

@@ -1,6 +1,7 @@
 import { useEffect, useCallback, useRef } from 'react';
 import { useNotifications } from '../context/NotificationContext';
 import { TCard } from '../types/card.type';
+import { apiConfig } from '../lib/apiConfig';
 
 const NOTIFICATION_CHECK_INTERVAL = 60000; // Check every minute
 
@@ -16,7 +17,7 @@ export const useDeadlineMonitor = () => {
       }
 
       // First, get all workspaces for the user
-      const workspacesResponse = await fetch(`${import.meta.env.VITE_API_URL}/workspaces`, {
+      const workspacesResponse = await fetch(`apiConfig.API_URL/workspaces`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -35,7 +36,7 @@ export const useDeadlineMonitor = () => {
       for (const workspace of workspaces) {
         try {
           const boardsResponse = await fetch(
-            `${import.meta.env.VITE_API_URL}/workspaces/${workspace.id}/boards`,
+            `apiConfig.API_URL/workspaces/${workspace.id}/boards`,
             {
               headers: {
                 'Authorization': `Bearer ${token}`,
@@ -52,7 +53,7 @@ export const useDeadlineMonitor = () => {
           for (const board of boards) {
             try {
               const listsResponse = await fetch(
-                `${import.meta.env.VITE_API_URL}/boards/${board.id}/lists`,
+                `apiConfig.API_URL/boards/${board.id}/lists`,
                 {
                   headers: {
                     'Authorization': `Bearer ${token}`,
@@ -69,7 +70,7 @@ export const useDeadlineMonitor = () => {
               for (const list of lists) {
                 try {
                   const cardsResponse = await fetch(
-                    `${import.meta.env.VITE_API_URL}/lists/${list.id}/cards`,
+                    `apiConfig.API_URL/lists/${list.id}/cards`,
                     {
                       headers: {
                         'Authorization': `Bearer ${token}`,

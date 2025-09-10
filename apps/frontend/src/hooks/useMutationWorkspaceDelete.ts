@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../context/AuthContextProvider';
 import refreshTokenHandler from '../lib/refreshTokenHandler';
+import { apiConfig } from '../lib/apiConfig';
 
 type useMutationWorkspaceDeleteProps = {
   selectedWorkspaceId: string | undefined;
@@ -45,7 +46,7 @@ const useMutationWorkspaceDelete = ({
 
   const submitHandler = async (token: string | null) => {
     const response = await fetch(
-      `${import.meta.env.VITE_API_WORKSPACES}/${selectedWorkspaceId}`,
+      `${apiConfig.API_WORKSPACES}/${selectedWorkspaceId}`,
       {
         method: 'DELETE',
         headers: {

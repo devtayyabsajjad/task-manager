@@ -6,6 +6,7 @@ import submitActivity from '../lib/submitActivity';
 import refreshTokenHandler from '../lib/refreshTokenHandler';
 import { TList } from '../types/list.type';
 import { toast } from 'react-toastify';
+import { apiConfig } from '../lib/apiConfig';
 
 const formSchema = z.object({
   list: z.string().min(1, 'List is required').trim()
@@ -52,7 +53,7 @@ const useMutationListCreate = ({
       const responseData: TList = await submitHandler(data, accessT);
 
       await submitActivity(
-        `${import.meta.env.VITE_API_WORKSPACES}`,
+        `apiConfig.API_WORKSPACES`,
         workspaceId!,
         responseData.title,
         'list',
@@ -78,7 +79,7 @@ const useMutationListCreate = ({
     token: string | null
   ) => {
     const response = await fetch(
-      `${import.meta.env.VITE_API_BOARDS}/${boardId}/lists`,
+      `apiConfig.API_BOARDS/${boardId}/lists`,
       {
         method: 'POST',
         headers: {

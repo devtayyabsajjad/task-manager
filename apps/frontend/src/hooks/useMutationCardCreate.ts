@@ -6,6 +6,7 @@ import submitActivity from '../lib/submitActivity';
 import refreshTokenHandler from '../lib/refreshTokenHandler';
 import { TCard } from '../types/card.type';
 import { toast } from 'react-toastify';
+import { apiConfig } from '../lib/apiConfig';
 
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required').trim(),
@@ -56,7 +57,7 @@ const useMutationCardCreate = ({
       const responseData: TCard = await submitHandler(data, accessT);
 
       await submitActivity(
-        `${import.meta.env.VITE_API_WORKSPACES}`,
+        apiConfig.API_WORKSPACES,
         workspaceId!,
         responseData.title,
         'card',
@@ -84,7 +85,7 @@ const useMutationCardCreate = ({
     token: string | null
   ) => {
     const response = await fetch(
-      `${import.meta.env.VITE_API_LISTS}/${listId}/cards`,
+      `${apiConfig.API_LISTS}/${listId}/cards`,
       {
         method: 'POST',
         headers: {

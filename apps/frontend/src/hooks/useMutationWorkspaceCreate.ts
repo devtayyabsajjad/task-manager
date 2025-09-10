@@ -77,19 +77,16 @@ const useMutationWorkspaceCreate = ({
     data: formType,
     token: string | null
   ) => {
-    const response = await fetch(
-      apiConfig.API_WORKSPACES,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token
-        },
-        body: JSON.stringify({
-          title: data.workspace
-        })
-      }
-    );
+    const response = await fetch(apiConfig.API_WORKSPACES, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
+      },
+      body: JSON.stringify({
+        title: data.workspace
+      })
+    });
 
     const body = await response.json();
 

@@ -10,6 +10,7 @@ import { format } from 'date-fns';
 import { TWorkspace } from '../../../types/workspace.type';
 import { TActivity } from '../../../types/activity.type';
 import useQueryAllByItemId from '../../../hooks/useQueryAllByItemId';
+import { apiConfig } from '../lib/apiConfig';
 
 type ActivitiesViewerProps = {
   selectedWorkspace: TWorkspace | undefined;
@@ -22,7 +23,7 @@ const ActivitiesViewer = ({
     TActivity[]
   >(
     'activities',
-    `${import.meta.env.VITE_API_WORKSPACES}`,
+    `apiConfig.API_WORKSPACES`,
     selectedWorkspace?.id
   );
 

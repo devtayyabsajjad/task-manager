@@ -1,4 +1,5 @@
 import isTokenExpired from './isTokenExpired';
+import { apiConfig } from '../lib/apiConfig';
 
 const refreshTokenHandler = async (
   accessT: string,
@@ -9,7 +10,7 @@ const refreshTokenHandler = async (
   if (isTokenExpired(accessT, refreshT)) {
     // Request to refresh token using refreshToken API endpoint
     const response = await fetch(
-      `${import.meta.env.VITE_API_JWT_REFRESH}`,
+      `apiConfig.API_JWT_REFRESH`,
       {
         method: 'POST',
         headers: {

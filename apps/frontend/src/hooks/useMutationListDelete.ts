@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContextProvider';
 import submitActivity from '../lib/submitActivity';
 import refreshTokenHandler from '../lib/refreshTokenHandler';
 import { toast } from 'react-toastify';
+import { apiConfig } from '../lib/apiConfig';
 
 type useMutationListDeleteProps = {
   toggleModal: () => void;
@@ -43,7 +44,7 @@ const useMutationListDelete = ({
       const responseData = await submitHandler(accessT);
 
       await submitActivity(
-        `${import.meta.env.VITE_API_WORKSPACES}`,
+        `apiConfig.API_WORKSPACES`,
         workspaceId!,
         listTitle!,
         'board',
@@ -65,7 +66,7 @@ const useMutationListDelete = ({
 
   const submitHandler = async (token: string | null) => {
     const response = await fetch(
-      `${import.meta.env.VITE_API_LISTS}/${listId}`,
+      `apiConfig.API_LISTS/${listId}`,
       {
         method: 'DELETE',
         headers: {

@@ -4,13 +4,14 @@ import { Box, CircularProgress, Container } from '@mui/material';
 import { TBoard } from '../types/board.type';
 import BoardTitleForm from '../components/Board/BordTitleForm';
 import ListComponent from '../components/Board/ListComponent';
+import { apiConfig } from '../lib/apiConfig';
 
 const BoardPage = () => {
   const { boardId } = useParams<{ boardId: string }>();
 
   const queryBoard = useQueryByItemId<TBoard>(
     'board',
-    `${import.meta.env.VITE_API_BOARDS}`,
+    apiConfig.API_BOARDS,
     boardId
   );
 
