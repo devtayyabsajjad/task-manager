@@ -5,6 +5,7 @@ import Viewer from '../components/Dashboard/Viewer';
 import useQueryAll from '../hooks/useQueryAll';
 import { TWorkspace } from '../types/workspace.type';
 import { toast } from 'react-toastify';
+import { apiConfig } from '../lib/apiConfig';
 
 type TWorkspaceMenuItem = 'boards' | 'activities';
 
@@ -21,7 +22,7 @@ const DashboardPage = () => {
     error
   } = useQueryAll<TWorkspace[]>(
     'workspaces',
-    `${import.meta.env.VITE_API_WORKSPACES}`
+    apiConfig.API_WORKSPACES
   );
 
   useEffect(() => {

@@ -6,6 +6,7 @@ import { TWorkspace } from '../types/workspace.type';
 import submitActivity from '../lib/submitActivity';
 import refreshTokenHandler from '../lib/refreshTokenHandler';
 import { toast } from 'react-toastify';
+import { apiConfig } from '../lib/apiConfig';
 
 const formSchema = z.object({
   workspace: z.string().min(1, 'Workspace is required').trim()
@@ -51,7 +52,7 @@ const useMutationWorkspaceCreate = ({
       );
 
       await submitActivity(
-        `${import.meta.env.VITE_API_WORKSPACES}`,
+        apiConfig.API_WORKSPACES,
         responseData.id,
         responseData.title,
         'workspace',
@@ -77,7 +78,7 @@ const useMutationWorkspaceCreate = ({
     token: string | null
   ) => {
     const response = await fetch(
-      `${import.meta.env.VITE_API_WORKSPACES}`,
+      apiConfig.API_WORKSPACES,
       {
         method: 'POST',
         headers: {
