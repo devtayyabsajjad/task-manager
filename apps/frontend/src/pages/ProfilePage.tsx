@@ -55,10 +55,7 @@ const ProfilePage = () => {
   const [showConfirmPassword, setShowConfirmPassword] =
     useState(false);
 
-  const userQuery = useQueryAll<TUser>(
-    'user',
-    apiConfig.API_USER
-  );
+  const userQuery = useQueryAll<TUser>('user', apiConfig.API_USER);
 
   const userMutation = useMutationUserUpdate();
 

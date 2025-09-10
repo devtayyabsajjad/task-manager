@@ -74,21 +74,18 @@ const useMutationCardUpdate = ({
     data: formType,
     token: string | null
   ) => {
-    const response = await fetch(
-      `${apiConfig.API_CARDS}/${cardId}`,
-      {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token
-        },
-        body: JSON.stringify({
-          title: data.title,
-          description: data.description,
-          priority: data.priority
-        })
-      }
-    );
+    const response = await fetch(`${apiConfig.API_CARDS}/${cardId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
+      },
+      body: JSON.stringify({
+        title: data.title,
+        description: data.description,
+        priority: data.priority
+      })
+    });
 
     const body = await response.json();
 

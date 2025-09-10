@@ -4,16 +4,21 @@ const isTokenExpired = (
   accessToken: string | null,
   refreshToken: string | null
 ) => {
-  const decodedAccessToken = jwtDecode(accessToken!);
-  const decodedRefreshToken = jwtDecode(refreshToken!);
+  if (!accessToken || !refreshToken) {
+    return true;
+  }
 
-  const accessTokenExpired =
-    decodedAccessToken.exp! * 1000 < Date.now();
-  const refreshTokenExpired =
-    decodedRefreshToken.exp! * 1000 < Date.now();
-
-  // If either access token or refresh token is expired, return true
-  return accessTokenExpired || refreshTokenExpired;
+  try {
+    const decodedAccessToken = jwtDecode(accessToken);
+    const accessTokenExpired = decodedAccessToken.exp! * 1000 < Date.now();
+    
+    // Only check if access token is expired
+    // If refresh token is expired, we'll handle that in the refresh process
+    return accessTokenExpired;
+  } catch (error) {
+    console.error('Error decoding token:', error);
+    return true;
+  }
 };
 
 export default isTokenExpired;

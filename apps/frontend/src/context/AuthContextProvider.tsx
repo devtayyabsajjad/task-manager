@@ -54,6 +54,9 @@ const AuthContextProvider = ({
   const clearToken = () => {
     setAccessToken('');
     setRefreshToken('');
+    // Clear from localStorage immediately
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
   };
 
   useEffect(() => {

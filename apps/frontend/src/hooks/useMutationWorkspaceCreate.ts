@@ -70,6 +70,10 @@ const useMutationWorkspaceCreate = ({
       toggleModal();
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ['workspaces'] });
+    },
+    onError: (error: Error) => {
+      console.error('Workspace creation failed:', error);
+      toast.error(error.message || 'Failed to create workspace');
     }
   });
 
@@ -88,8 +92,16 @@ const useMutationWorkspaceCreate = ({
       })
     });
 
-    const body = await response.json();
+    if (!response.ok) {
+      if (response.status === 401) {
+        clearToken();
+        throw new Error('Authentication failed. Please login again.');
+      }
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`);
+    }
 
+    const body = await response.json();
     return body;
   };
 

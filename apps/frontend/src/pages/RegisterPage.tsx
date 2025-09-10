@@ -41,10 +41,9 @@ const formSchema = z
     confirmPassword: z
       .string()
       .min(1, 'Password confirmation is required'),
-    role: z
-      .enum(['USER', 'ADMIN'], {
-        required_error: 'Role is required',
-      })
+    role: z.enum(['USER', 'ADMIN'], {
+      required_error: 'Role is required'
+    })
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ['confirmPassword'],
@@ -83,19 +82,16 @@ const RegisterPage = () => {
       setError(false);
       setErrorText('');
       setSubmitting(true);
-      const response = await fetch(
-        apiConfig.API_REGISTER,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            username: data.username,
-            email: data.email,
-            password: data.password,
-            role: data.role
-          })
-        }
-      );
+      const response = await fetch(apiConfig.API_REGISTER, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: data.username,
+          email: data.email,
+          password: data.password,
+          role: data.role
+        })
+      });
       if (response.ok) {
         navigate('/login');
       } else {

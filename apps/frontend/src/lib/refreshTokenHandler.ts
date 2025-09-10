@@ -10,7 +10,7 @@ const refreshTokenHandler = async (
   if (isTokenExpired(accessT, refreshT)) {
     // Request to refresh token using refreshToken API endpoint
     const response = await fetch(
-      `apiConfig.API_JWT_REFRESH`,
+      apiConfig.API_JWT_REFRESH,
       {
         method: 'POST',
         headers: {
@@ -26,9 +26,10 @@ const refreshTokenHandler = async (
       refreshT = refresh_token;
       setToken(access_token, refresh_token);
     } else {
+      console.error('Token refresh failed:', response.status, response.statusText);
       clearToken();
       // If refresh token is also expired or invalid, redirect to login
-      throw new Error('Refresh token experid');
+      throw new Error('Session expired. Please login again.');
     }
   }
 
