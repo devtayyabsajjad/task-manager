@@ -15,6 +15,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { apiConfig } from '../lib/apiConfig';
 import { useAuth } from '../context/AuthContextProvider';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -41,7 +42,7 @@ const Header = () => {
   const logout = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_LOGOUT}`,
+        apiConfig.API_LOGOUT,
         {
           method: 'POST',
           headers: {

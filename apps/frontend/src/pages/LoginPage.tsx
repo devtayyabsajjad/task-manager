@@ -18,6 +18,7 @@ import {
   Typography
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { apiConfig } from '../lib/apiConfig';
 import { useAuth } from '../context/AuthContextProvider';
 
 const formSchema = z.object({
@@ -61,7 +62,7 @@ const LoginPage = () => {
       setErrorText('');
       setSubmitting(true);
       const response = await fetch(
-        `${import.meta.env.VITE_API_LOGIN}`,
+        apiConfig.API_LOGIN,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
